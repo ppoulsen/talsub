@@ -53,7 +53,7 @@ ROOT_URLCONF = 'web.urls'
 WSGI_APPLICATION = 'web.wsgi.application'
 
 TEMPLATE_DIRS = (
-    os.path.join(os.path.dirname(__file__), 'templates').replace('\\', '/'),
+    os.path.join(os.path.dirname(__file__), '../talsub/templates').replace('\\', '/'),
 )
 
 
@@ -82,5 +82,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "talsub"+os.sep+"static"),
+    os.path.join(BASE_DIR, "static"),
+)
 
 STATIC_URL = '/static/'
