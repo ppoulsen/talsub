@@ -5,16 +5,19 @@
 require.config({
     baseUrl: '/static/js',
     paths: {
+        bootstrap: 'lib/bootstrap.min',
+        jplayer: 'lib/jplayer/jquery.jplayer.min',
         jquery: 'http://code.jquery.com/jquery',
-        bootstrap: 'bootstrap.min'
+        lib: 'lib',
+        module: 'module',
+        page: 'page'
     },
     shim: {
-        'jquery.tmpl': ['jquery'],
-        'jquery.validate': ['jquery'],
-        'jquery-ui': ['jquery'],
-        'jquery.slinky': ['jquery'],
-        'bootstrap': [
-            'jquery'
-        ]
+        'bootstrap': {
+            deps: ['jquery']
+        },
+        'jplayer': {
+            deps: ['jquery']
+        }
     }
 });

@@ -2,9 +2,11 @@
 {% load staticfiles %}
 {% block title %}Home{% endblock %}
 {% block head %}
-    <script type="application/javascript" src="{% static "js/index.js" %}"></script>
+    <link type="text/css" href="{% static "skin/jplayer.blue.monday.css" %}" rel="stylesheet">
+    <script type="application/javascript" src="{% static "js/page/index.js" %}"></script>
 {% endblock %}
 {% block content %}
+    {% include "shared/player.html" %}
     <div class="container">
         <h1>Hello, world!</h1>
     </div>
