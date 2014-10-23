@@ -62,3 +62,33 @@ class DTOConverter(object):
                 setattr(new_dto, key, value)
 
         return new_dto
+
+
+class ModelConverter(object):
+    """
+    This class converts any dict-like object into a model based on member names.
+    """
+
+    @staticmethod
+    def to_model(cls, obj):
+        """
+        Converts the obj to a model of type cls
+        :param cls: The model class to convert to
+        :param obj: The dict-like object to convert to cls
+        :return: A model of type cls
+        """
+
+        new_model = cls()
+
+        for key, value in obj.iteritems():
+            if value:
+                if key == 'transcripts':
+                    setattr(new_model, key, [ModelConverter.to_model(Transcript, t) for t in value])
+                elif key == 'acts' and cls == Transcript:
+                    setattr(new_model, key, [ModelConverter.to_model(Act, a) for a in value])
+                elif key == 'subtitles':
+                    setattr(new_model, key, [ModelConverter.to_model(Subtitle, s) for s in value])
+                else:
+                    setattr(new_model, key, value)
+
+        return new_model
