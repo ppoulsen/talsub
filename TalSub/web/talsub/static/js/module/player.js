@@ -5,30 +5,38 @@
  * underlying audio player library.
  */
 
-define(['jquery', 'jplayer'], function ($) {
+define(['jquery', 'jplayer', 'jplaylist'], function ($) {
     'use strict';
-    function Player(selector) {
+    function Player(player, container, inspector) {
         if (!(this instanceof Player)) {
             throw new TypeError("Player constructor cannot be called as a function.");
         }
 
-        this._player = $(selector);
+        // List of episodes
+        this._episodes = [];
+        // Temporarily fill like this:
+        for (var i = 1; i <= 538; i++) {
+            this._episodes.push({
+                title: "Episode " + i,
+                artist: "This American Life",
+                mp3: "http://audio.thisamericanlife.org/jomamashouse/ismymamashouse/" + i + ".mp3"
+            });
+        }
 
-        this._player.jPlayer({
-            ready: function () {
-                $(this).jPlayer("setMedia", {
-                    title: "TAL Episode 1",
-                    mp3: "http://audio.thisamericanlife.org/jomamashouse/ismymamashouse/1.mp3"
-                });
+        this._player = $(player);
+        this._playlist = new jPlayerPlaylist({
+                jPlayer: player,
+                cssSelectorAncestor: container
             },
-            swfPath: '/static/js/lib/jplayer',
-            supplied: 'mp3'
-        });
-    };
+            this._episodes, {
+                swfPath: '/static/js/lib/jplayer',
+                supplied: 'mp3'
+            });
 
-    Player.prototype = {
-        constructor: Player
-    };
+        Player.prototype = {
+            constructor: Player
+        };
+    }
 
     return Player;
 });

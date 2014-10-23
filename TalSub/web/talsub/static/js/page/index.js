@@ -13,7 +13,7 @@ require(['jquery', 'module/player', 'bootstrap'],
 
         // Perform basic initialization tasks to setup index.html
         function initialize() {
-            player = new Player('#jquery_jplayer_1');
+            player = new Player('#jquery_jplayer_1', '#jp_container_1', '#jplayer_inspector_1');
         };
 
         // Initialize on page load
