@@ -15,6 +15,12 @@ define(['jquery', 'jplayer'], function ($) {
         this._player = $(selector);
 
         this._player.jPlayer({
+            ready: function () {
+                $(this).jPlayer("setMedia", {
+                    title: "TAL Episode 1",
+                    mp3: "http://audio.thisamericanlife.org/jomamashouse/ismymamashouse/1.mp3"
+                });
+            },
             swfPath: '/static/js/lib/jplayer',
             supplied: 'mp3'
         });
