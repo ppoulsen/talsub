@@ -1,0 +1,5 @@
+.jp-playlist {
+    height: 475px;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
