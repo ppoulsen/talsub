@@ -47,9 +47,9 @@ class DTOConverter(object):
 
         # Grab DTO from db if exists
         if cls == EpisodeDTO:
-            queryset = EpisodeDAO.find(number=obj.number)
-            if queryset.count() > 0:
-                new_dto = queryset.first()
+            existing = EpisodeDAO.find(number=obj.number).first()
+            if existing:
+                new_dto = existing
 
         for key, value in obj.__dict__.iteritems():
             if key == 'transcripts':
@@ -60,6 +60,5 @@ class DTOConverter(object):
                 setattr(new_dto, key, [DTOConverter.to_dto(SubtitleDTO, s) for s in value])
             else:
                 setattr(new_dto, key, value)
-
 
         return new_dto
