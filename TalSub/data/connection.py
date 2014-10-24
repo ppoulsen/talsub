@@ -19,7 +19,7 @@ class DBConnection(object):
 
         user = get_config('data', 'user')
         if user:
-            kwargs['user'] = user
+            kwargs['username'] = user
 
         password = get_config('data', 'password')
         if password:
