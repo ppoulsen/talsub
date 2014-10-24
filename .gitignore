@@ -99,3 +99,6 @@ atlassian-ide-plugin.xml
 com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
+
+# Ignore config.ini to hide sensitive data
+config.ini
