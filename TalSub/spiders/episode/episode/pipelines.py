@@ -1,3 +1,8 @@
+#
+# pipelines.py
+# A module containing custom pipelines for the EpisodeSpider
+#
+
 # -*- coding: utf-8 -*-
 
 # Define your item pipelines here
@@ -13,6 +18,11 @@ from shared.converters import *
 
 class EpisodePipeline(object):
     def process_item(self, item, spider):
+        """
+        Processes the given spider item by storing it in the database
+        :param item: The EpisodeItem to store
+        :param spider: The EpisodeSpider object
+        """
         model = ModelConverter().to_model(Episode, item)
         dto = DTOConverter().to_dto(EpisodeDTO, model)
         dao = EpisodeDAO()

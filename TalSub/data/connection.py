@@ -11,16 +11,19 @@ class DBConnection(object):
     """A class that encapsulates the MongoDB connection."""
 
     def __init__(self):
+        # Build necessary args from config
         kwargs = {
             'db': get_config('data', 'dbname'),
             'host': get_config('data', 'host'),
             'port': get_config('data', 'port', is_int=True)
         }
 
+        # Optional argument to MongoDB
         user = get_config('data', 'user')
         if user:
             kwargs['username'] = user
 
+        # Optional argument to MongoDB
         password = get_config('data', 'password')
         if password:
             kwargs['password'] = password

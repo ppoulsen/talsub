@@ -1,3 +1,8 @@
+#
+# items.py
+# A module containing Scrapy Items that correspond to the models in model.episode
+#
+
 # -*- coding: utf-8 -*-
 
 # Define here the models for your scraped items

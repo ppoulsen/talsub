@@ -1,3 +1,8 @@
+#
+# episode_spider.py
+# The module which holds EpisodeSpider, the spider that crawls TAL episode transcripts
+#
+
 import datetime
 import scrapy
 from scrapy.selector import Selector
@@ -5,14 +10,23 @@ from scrapy.http import Request
 
 from items import *
 
+
 class EpisodeSpider(scrapy.Spider):
     name = "episode"
     allowed_domains = ["thisamericanlife.org"]
-    start_urls = [ ]
+    # URLs come from the start_requests() function
+    start_urls = []
+    # Format for TAL transcript HTML pages
     URL_FORMAT = 'http://www.thisamericanlife.org/radio-archives/episode/{0}/transcript'
+    # Format for TAL mp3 locations
     MP3_URL_FORMAT = 'http://audio.thisamericanlife.org/jomamashouse/ismymamashouse/{0}.mp3'
 
     def __init__(self, start=1, stop=538):
+        """
+        Instantiate the EpisodeSpider
+        :param start: Episode to start on (inclusive, first episode is 1)
+        :param stop: Episode to end on (inclusive)
+        """
         self.start = start
         self.stop = stop
 
@@ -26,10 +40,16 @@ class EpisodeSpider(scrapy.Spider):
 
         cls = EpisodeSpider
 
+        # Populate the request queue with every episode's transcript from start to stop
         for i in range(self.start, self.stop + 1):
             yield Request(cls.URL_FORMAT.format(i))
 
     def parse(self, response):
+        """
+        Parse the HttpResponse to an EpisodeItem and return.
+        :param response: HttpResponse from a TAL transcript page
+        :return: The parsed EpisodeItem
+        """
         cls = EpisodeSpider
 
         item = EpisodeItem()
@@ -66,6 +86,11 @@ class EpisodeSpider(scrapy.Spider):
         return item
 
     def parse_transcript(self, selector):
+        """
+        Parse out the TranscriptItem from a Selector for the whole TAL transcript page
+        :param selector: Selector object for xpath queries
+        :return: TranscriptItem for page
+        """
         item = TranscriptItem()
 
         # All shows are en-US
@@ -82,6 +107,12 @@ class EpisodeSpider(scrapy.Spider):
         return item
 
     def parse_act(self, selector, index):
+        """
+        Parse out the ActItem for a given Selector wrapping the <div class="act"> tag.
+        :param selector: Selector for the <div class="act"> tag
+        :param index: Index of the act on the page
+        :return: ActItem for the div
+        """
         item = ActItem()
 
         # Get act_title as with the list in EpisodeItem
@@ -105,12 +136,27 @@ class EpisodeSpider(scrapy.Spider):
         return item
 
     def parse_subtitles(self, selector):
+        """
+        Parse out the SubtitleItem(s) for a Selector wrapping the children div tags of <div class="act-inner">
+        :param selector: Selector wrapping the children div tags of <div class="act-inner">
+        :return: A list of SubtitleItems
+        """
+
+        # Initialize list for items
         items = []
+
+        # Get role from top div's class attribute
         role = selector.xpath('/html/body/div/@class').extract()[0]
+
+        # Set speaker to role by default, since some of these tags don't identify speaker
         speaker = role
+
+        # Attempt to get the speaker's name from the h4 tag. If it exists, set speaker to that.
         potential_speaker = selector.xpath('/html/body/div/h4/text()').extract()
         if len(potential_speaker) > 0:
             speaker = potential_speaker[0]
+
+        # Iterate through <p> tags for each SubtitleItem
         paragraphs = selector.xpath('/html/body/div/p').extract()
         for paragraph in paragraphs:
             # Item for each
@@ -127,11 +173,12 @@ class EpisodeSpider(scrapy.Spider):
             time_str = para_selector.xpath('//p/@begin').extract()[0]
             # We're storing time in a float of seconds, so conver from HH:MM:SS.xx
             time_str_split = time_str.split(':')
-            seconds = float(time_str_split[2]) #seconds
-            seconds += float(time_str_split[1]) * 60.0 #minutes
-            seconds += float(time_str_split[0]) * 60.0 * 60.0 #hours
+            seconds = float(time_str_split[2])  # seconds
+            seconds += float(time_str_split[1]) * 60.0  # minutes
+            seconds += float(time_str_split[0]) * 60.0 * 60.0  # hours
             item['time'] = seconds
 
+            # Append all text node descendants of <p> to erase HTML tags
             item['paragraph'] = ''.join(para_selector.xpath('//p//text()').extract())
             items.append(item)
 
