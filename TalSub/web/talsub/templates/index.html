@@ -9,9 +9,14 @@
 {% block content %}
     <div class="row">
         <div class="col-md-1"></div>
-        <div class="col-md-6">
+        <div class="col-md-3">
             {% include "shared/player.html" %}
         </div>
-        <div class="col-md-5"></div>
+        <div class="col-md-7">
+            <h1><span id="episode_title"></span> <small id="episode_date"></small></h1>
+            <h3><span id="episode_speaker"></span> <small id="episode_role"></small></h3>
+            <p id="subtitles" class="lead"></p>
+        </div>
+        <div class="col-md-1"></div>
     </div>
 {% endblock %}

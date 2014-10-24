@@ -1,4 +1,4 @@
-from models.episode import *
+from model.episode import *
 from data.dto import *
 from data.dao import *
 
@@ -33,6 +33,8 @@ class DTOConverter(object):
             else:
                 if key != 'id':
                     setattr(new_model, key, obj._data[key])
+
+        return new_model
 
     @staticmethod
     def to_dto(cls, obj):
