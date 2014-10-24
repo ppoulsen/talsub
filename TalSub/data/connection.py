@@ -12,7 +12,7 @@ class DBConnection(object):
 
     def __init__(self):
         kwargs = {
-            'db_name': get_config('data', 'dbname'),
+            'db': get_config('data', 'dbname'),
             'host': get_config('data', 'host'),
             'port': get_config('data', 'port', is_int=True)
         }

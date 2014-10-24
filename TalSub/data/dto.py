@@ -6,7 +6,7 @@
 import mongoengine as me
 
 
-class SubtitleDTO(me.EmbeddedDocumentField):
+class SubtitleDTO(me.EmbeddedDocument):
     """
     A sub-DTO to encapsulate a single subtitle of an act. Use by ActDTO
     """
@@ -19,7 +19,7 @@ class SubtitleDTO(me.EmbeddedDocumentField):
     paragraph = me.StringField(db_field='p')
 
 
-class ActDTO(me.EmbeddedDocumentField):
+class ActDTO(me.EmbeddedDocument):
     """
     A sub-DTO to encapsulate an act of a transcript. Used by TranscriptDTO.
     """
@@ -50,5 +50,5 @@ class EpisodeDTO(me.Document):
     act_count = me.IntField(db_field='ac', min_value=1)
     acts = me.ListField(db_field='a', field=me.StringField())
     languages = me.ListField(db_field='l', field=me.StringField())
-    transcripts = me.ListField(db_field='t', field=me.EmbeddedDocumentField(TranscriptDTO))
+    transcripts = me.ListField(db_field='ts', field=me.EmbeddedDocumentField(TranscriptDTO))
     audio = me.URLField(db_field='au')

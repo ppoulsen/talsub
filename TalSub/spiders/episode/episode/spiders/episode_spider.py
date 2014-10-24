@@ -26,7 +26,7 @@ class EpisodeSpider(scrapy.Spider):
 
         cls = EpisodeSpider
 
-        for i in range(self.start, self.stop):
+        for i in range(self.start, self.stop + 1):
             yield Request(cls.URL_FORMAT.format(i))
 
     def parse(self, response):

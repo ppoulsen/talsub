@@ -62,7 +62,7 @@ class Episode(object):
     Model for an episode of This American Life
     """
 
-    def __init__(self, number, title='', date=None, act_count=0, acts=[], languages=[], transcripts=[], audio=''):
+    def __init__(self, number=None, title='', date=None, act_count=0, acts=[], languages=[], transcripts=[], audio=''):
         """
         Initialize Episode model
         :param number: Episode number
