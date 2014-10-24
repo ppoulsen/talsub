@@ -1,3 +1,8 @@
+#
+# views.py
+# These are controllers (Django has bad naming) for calls to web server
+#
+
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotAllowed
 import json
@@ -8,6 +13,11 @@ from shared.converters import DTOConverter
 
 
 def home(request):
+    """
+    Return the home page
+    :param request: HttpRequest for home page
+    :return: Rendered index.html template
+    """
     return render(request, 'index.html')
 
 

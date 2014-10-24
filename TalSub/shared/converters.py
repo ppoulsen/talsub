@@ -1,3 +1,8 @@
+#
+# converters.py
+# A Module for converting from Model <-> DTO and ScrapyItem -> Model
+#
+
 from model.episode import *
 from data.dto import *
 from data.dao import *

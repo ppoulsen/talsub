@@ -22,6 +22,8 @@ require(['jquery', 'module/player', 'bootstrap'],
                 episodeRole: '#episode_role',
                 subtitles: '#subtitles'
             });
+
+            // Populate playlist with call to /episode_list?lang=en-US
             $.getJSON('/episode_list', {lang: 'en-US'}, function (list) {
                 player.setPlaylist(list);
             });

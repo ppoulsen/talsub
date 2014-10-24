@@ -1,3 +1,8 @@
+#
+# urls.py
+# This module connects URLs to controllers (named views in Django)
+#
+
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
