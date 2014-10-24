@@ -1,7 +1,7 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>TAL Subtitles - {% block title %}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
@@ -11,10 +11,10 @@
     <script type="application/javascript" src="{% static "js/requireconfig.js" %}"></script>
     {% block head %}
     {% endblock %}
-  </head>
-  <body>
-    {% include "shared/navigation.html" %}
-    {% block content %}
-    {% endblock %}
-  </body>
+</head>
+<body>
+{% include "shared/navigation.html" %}
+{% block content %}
+{% endblock %}
+</body>
 </html>

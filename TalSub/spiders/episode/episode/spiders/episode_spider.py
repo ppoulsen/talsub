@@ -5,10 +5,11 @@ from scrapy.http import Request
 
 from items import *
 
+
 class EpisodeSpider(scrapy.Spider):
     name = "episode"
     allowed_domains = ["thisamericanlife.org"]
-    start_urls = [ ]
+    start_urls = []
     URL_FORMAT = 'http://www.thisamericanlife.org/radio-archives/episode/{0}/transcript'
     MP3_URL_FORMAT = 'http://audio.thisamericanlife.org/jomamashouse/ismymamashouse/{0}.mp3'
 
@@ -127,9 +128,9 @@ class EpisodeSpider(scrapy.Spider):
             time_str = para_selector.xpath('//p/@begin').extract()[0]
             # We're storing time in a float of seconds, so conver from HH:MM:SS.xx
             time_str_split = time_str.split(':')
-            seconds = float(time_str_split[2]) #seconds
-            seconds += float(time_str_split[1]) * 60.0 #minutes
-            seconds += float(time_str_split[0]) * 60.0 * 60.0 #hours
+            seconds = float(time_str_split[2])  # seconds
+            seconds += float(time_str_split[1]) * 60.0  # minutes
+            seconds += float(time_str_split[0]) * 60.0 * 60.0  # hours
             item['time'] = seconds
 
             item['paragraph'] = ''.join(para_selector.xpath('//p//text()').extract())

@@ -46,11 +46,11 @@ define(['jquery', 'jplayer', 'jplaylist'], function ($) {
         function newEpisodeHandler(event) {
             // Find out what episode is selected by taking it from the media URL
             var url = event.jPlayer.status.src;
-            var filename = url.substring(url.lastIndexOf('/')+1);
+            var filename = url.substring(url.lastIndexOf('/') + 1);
             var number = filename.substring(0, filename.lastIndexOf('.'));
 
             // Set the transcript
-            $.getJSON('/transcript/', {lang: 'en-US', episode: number}, function(transcript){
+            $.getJSON('/transcript/', {lang: 'en-US', episode: number}, function (transcript) {
                 this_player._transcript = transcript;
                 this_player.episodeTitle.text('#' + transcript.number + ' ' + transcript.title);
                 this_player.episodeDate.text(transcript.date);
@@ -99,12 +99,12 @@ define(['jquery', 'jplayer', 'jplaylist'], function ($) {
         }
 
         // Bind to setmedia to capture new episode changes
-        this._player.bind($.jPlayer.event.setmedia, function(event) {
+        this._player.bind($.jPlayer.event.setmedia, function (event) {
             newEpisodeHandler(event);
         });
 
         // Bind to timeupdate so we can update subtitles
-        this._player.bind($.jPlayer.event.timeupdate, function(event) {
+        this._player.bind($.jPlayer.event.timeupdate, function (event) {
             timeUpdateHandler(event);
         });
     }
