@@ -14,14 +14,6 @@ define(['jquery', 'jplayer', 'jplaylist'], function ($) {
 
         // List of episodes
         this._episodes = [];
-        // Temporarily fill like this:
-        for (var i = 1; i <= 538; i++) {
-            this._episodes.push({
-                title: "Episode " + i,
-                artist: "This American Life",
-                mp3: "http://audio.thisamericanlife.org/jomamashouse/ismymamashouse/" + i + ".mp3"
-            });
-        }
 
         this._player = $(player);
         this._playlist = new jPlayerPlaylist({
@@ -32,11 +24,27 @@ define(['jquery', 'jplayer', 'jplaylist'], function ($) {
                 swfPath: '/static/js/lib/jplayer',
                 supplied: 'mp3'
             });
-
-        Player.prototype = {
-            constructor: Player
-        };
     }
+
+    Player.prototype = {
+        constructor: Player,
+
+        /**
+         * Clear the playlist and update with the new episode_list
+         */
+        setPlaylist: function (episode_list) {
+            this._episodes = [];
+            var player = this;
+            $.each(episode_list, function (index, value) {
+                player._episodes.push({
+                    title: "#" + value.number + " " + value.title,
+                    artist: "This American Life",
+                    mp3: value.audio
+                });
+            });
+            this._playlist.setPlaylist(this._episodes);
+        }
+    };
 
     return Player;
 });

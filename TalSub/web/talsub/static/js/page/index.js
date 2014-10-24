@@ -14,6 +14,9 @@ require(['jquery', 'module/player', 'bootstrap'],
         // Perform basic initialization tasks to setup index.html
         function initialize() {
             player = new Player('#jquery_jplayer_1', '#jp_container_1', '#jplayer_inspector_1');
+            $.getJSON('/episode_list', {lang: 'en-US'}, function (list) {
+                player.setPlaylist(list);
+            });
         };
 
         // Initialize on page load
