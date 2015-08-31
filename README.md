@@ -21,7 +21,6 @@ This application was developed on Windows 8.1, thus the development instructions
 5. Copy template.config.ini to config.ini and configure. (If you were invited here by me, I probably gave you this.)
 6. If you would like to use a local MongoDB service for debugging, install MongoDB
   * http://www.mongodb.org/downloads
-  * If you were invited here by me, the config.ini I provided should point toward a remote MongoDB and you will not need to create a local one.
 
 The above instructions will allow you to run the web server locally with `python manage.py runserver` provided the working directory is `path\to\TalSub\web` and `path\to\TalSub` is in the `PYTHONPATH`.
 
@@ -39,5 +38,3 @@ If you would like to run the spiders, you will need additional packages that are
 5. Add `\path\to\TalSub\spiders\episode\episode` to PYTHONPATH
 
 Run the spider with `\path\to\TalSub\spiders\episode\episode\run.py`. By default, this will crawl episodes 1 to 538. To limit the scope, alter the `EpisodeSpider` constructor call in run.py as described in the comments.
-
-**If you were invited here by me, please alter the provided config.ini to point at a MongoDB instance you set up and not the remote one.**
