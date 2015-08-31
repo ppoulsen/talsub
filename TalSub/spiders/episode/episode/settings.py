@@ -10,8 +10,8 @@
 
 BOT_NAME = 'episode'
 
-SPIDER_MODULES = ['episode.spiders']
-NEWSPIDER_MODULE = 'episode.spiders'
+SPIDER_MODULES = ['spiders']
+NEWSPIDER_MODULE = 'spiders'
 
 ITEM_PIPELINES = {
     'pipelines.EpisodePipeline': 300

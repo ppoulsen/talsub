@@ -3,27 +3,18 @@
 # Simple script for running the spider.
 #
 
-from twisted.internet import reactor
-from scrapy.crawler import Crawler
 from scrapy.utils.project import get_project_settings
+from scrapy.crawler import CrawlerProcess
 
 from spiders.episode_spider import EpisodeSpider
 
 # TODO: Add argparse so developers don't need to edit this file when running a job
 if __name__ == '__main__':
-    # Instantiate spider
-    # NOTE: Change EpisodeSpider constructor args to limit scope
-    # e.g. EpisodeSpider(start=10, end=12) will crawl TAL episodes 10, 11, and 12
-    spider = EpisodeSpider()
-
     # Get settings from settings.py
     settings = get_project_settings()
+    process = CrawlerProcess(settings)
 
-    # Instantiate Crawler
-    crawler = Crawler(settings)
-
-    # Run crawler with EpisodeSpider
-    crawler.configure()
-    crawler.crawl(spider)
-    crawler.start()
-    reactor.run()
+    # NOTE: Change EpisodeSpider constructor args to limit scope
+    # e.g. EpisodeSpider(start=10, stop=12) will crawl TAL episodes 10, 11, and 12
+    process.crawl(EpisodeSpider, start=1, stop=564)
+    process.start() # the script will block here until the crawling is finished
