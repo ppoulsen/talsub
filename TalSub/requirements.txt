@@ -1,5 +1,5 @@
-Django==1.7
-mongoengine==0.8.7
+Django==1.8.4
+mongoengine==0.10.0
 pip==1.5.6
-pymongo==2.7.2
+pymongo==2.8
 setuptools==7.0

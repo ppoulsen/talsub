@@ -12,7 +12,7 @@
 
 from data.dao import EpisodeDAO
 from data.dto import EpisodeDTO
-from models.episode import Episode
+from model.episode import Episode
 from shared.converters import *
 
 

@@ -11,7 +11,7 @@ Hope you enjoy!
 
 Development Setup
 -----
-This application was developed on Windows 7, thus the development instructions will be geared toward that setup. These instructions will enable you to run the debug web application from your local machine and test on localhost:8000.
+This application was developed on Windows 8.1, thus the development instructions will be geared toward that setup. These instructions will enable you to run the debug web application from your local machine and test on localhost:8000.
 
 1. Install Python 2.7 32-bit
 2. Install pip
@@ -21,7 +21,6 @@ This application was developed on Windows 7, thus the development instructions w
 5. Copy template.config.ini to config.ini and configure. (If you were invited here by me, I probably gave you this.)
 6. If you would like to use a local MongoDB service for debugging, install MongoDB
   * http://www.mongodb.org/downloads
-  * If you were invited here by me, the config.ini I provided should point toward a remote MongoDB and you will not need to create a local one.
 
 The above instructions will allow you to run the web server locally with `python manage.py runserver` provided the working directory is `path\to\TalSub\web` and `path\to\TalSub` is in the `PYTHONPATH`.
 
@@ -31,13 +30,11 @@ If you would like to run the spiders, you will need additional packages that are
 2. Install OpenSSL by running Win32OpenSSL-1\_0_1j.exe
 3. Then, from virtualenv (if using one) run:
     1. `easy_install pywin32-219.win32-py2.7.exe`
-    2. `easy_install Twisted-14.0.2.win32-py2.7.exe`
-    3. `easy_install zope.interface-4.1.1-py2.7-win32.egg`
-    4. `easy_install lxml-3.4.0.win32-py2.7.exe`
+    2. `easy_install Twisted-15.3.0.win32-py2.7.exe`
+    3. `easy_install zope.interface-4.1.2-py2.7-win32.egg`
+    4. `easy_install lxml-3.4.4.win32-py2.7.exe`
     5. `easy_install pyOpenSSL-0.11-py2.7-win32.egg`
 4. `pip install -r \path\to\all.requirements.txt`
 5. Add `\path\to\TalSub\spiders\episode\episode` to PYTHONPATH
 
 Run the spider with `\path\to\TalSub\spiders\episode\episode\run.py`. By default, this will crawl episodes 1 to 538. To limit the scope, alter the `EpisodeSpider` constructor call in run.py as described in the comments.
-
-**If you were invited here by me, please alter the provided config.ini to point at a MongoDB instance you set up and not the remote one.**
